@@ -5,4 +5,4 @@ from .foo import *
 
 __author__ = """Nikos Koumbakis"""
 __email__ = 'n.koumbakis@gmail.com'
-__version__ = '0.1.3'
+__version__ = '0.1.4'
