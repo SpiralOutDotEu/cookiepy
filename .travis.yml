@@ -10,7 +10,7 @@ deploy:
   provider: pypi
   distributions: sdist bdist_wheel
   user: SpiralOutDoEu
-  server: https://testpypi.python.org/pypi
+  server: https://test.pypi.org/legacy/
   password:
     secure: Bgem1uWyIFjWG32yUVU/ttedl/Nsac0Dzq4MHGcAkuH+P+clSFM0CPGWm/or9+k3vicaWC3QHJiy5RjllVyeK09aBpakOu5k8Ny3tCTDa8bdXGH+euAufReRRZRZMjJh68bXEMMZ/VJTUluUr3s+ZtpPzmKQy5ppyOLwnftIAvjcA7bHum1+jtB5AzAvpPKZ/XvXUX5uD1bzflvntONdB6vt/UdqnC6SYv4z4Mo+FBtiHDytV2l3qLXblr3bRt67kgJDa1S9wegqORCetBZSi4eHBMzdEmYR9xq7lfBiHYNrk1B3Fz7iDjnkbJElT+5IV0T9EGoS2+WbSjV8ZFPhDPDEQiB8XHfq1ggBNZNiXHv97Wmoj8bntzMYTLcHfxK+xd+CVazumWMcDLKN4rYstGflAivizNDRuYhjl3OAa9jDcU/nA4wjH+3r8BACPMqd91xiEOnQZ8vdwk5OUsqz01a2/1hEPRxbII5DYqItTCof6p5SGHm0vhbGZg3RJs5J+1gaN6GyPv9+MVypHK0XacKJnSpl2wy9C+cp4q4zPHJdga4c9dVJfh8+cJwKUpWWvyKmmsc6kwaptmIB3NkyoFrJ2wvOcwh5ULNSPShwFvNk1eD7aeThfrTgdgMJNKCKPVBOhOdMUp4HglM4sfCiayD0IFJYX3jQXA7XH7kZLZk=
   on:
