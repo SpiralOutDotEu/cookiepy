@@ -22,11 +22,21 @@ Python Boilerplate contains all the boilerplate you need to create a Python pack
 * Free software: MIT license
 * Documentation: https://cookiepy.readthedocs.io.
 
+Usage
+--------
+::
+
+        $ pip install -i https://test.pypi.org/simple/ cookiepy
+        
+        >>> import cookiepy as py
+        >>> py.foo()
+        >>> py.bar()
+
 
 Features
 --------
 
-* TODO
+* It foo and it bar
 
 Credits
 -------
