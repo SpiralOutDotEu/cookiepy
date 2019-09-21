@@ -33,7 +33,7 @@ setup(
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
     ],
-    description="Python Boilerplate contains all the boilerplate you need to create a Python package.",
+    description="Python Boilerplate for Python package.",
     entry_points={
         'console_scripts': [
             'cookiepy=cookiepy.cli:main',
@@ -50,6 +50,6 @@ setup(
     test_suite='tests',
     tests_require=test_requirements,
     url='https://github.com/SpiralOutDoEu/cookiepy',
-    version='0.2.7',
+    version='0.2.8',
     zip_safe=False,
 )
