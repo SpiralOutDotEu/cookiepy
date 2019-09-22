@@ -6,8 +6,8 @@ cookiepy
 .. image:: https://img.shields.io/pypi/v/cookiepy.svg
         :target: https://pypi.python.org/pypi/cookiepy
 
-.. image:: https://img.shields.io/travis/SpiralOutDoEu/cookiepy.svg
-        :target: https://travis-ci.org/SpiralOutDoEu/cookiepy
+.. image:: https://img.shields.io/travis/SpiralOutDotEu/cookiepy.svg
+        :target: https://travis-ci.org/SpiralOutDotEu/cookiepy
 
 .. image:: https://readthedocs.org/projects/cookiepy/badge/?version=latest
         :target: https://cookiepy.readthedocs.io/en/latest/?badge=latest
