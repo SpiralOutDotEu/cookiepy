@@ -6,4 +6,4 @@ from .numfoo import *
 
 __author__ = """Nikos Koumbakis"""
 __email__ = 'n.koumbakis@gmail.com'
-__version__ = '0.3.7'
+__version__ = '0.4.0'
