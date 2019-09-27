@@ -10,7 +10,6 @@ script:
   - tox
 after_success:
   - codecov
-  - bash <(curl -s https://codecov.io/bash)
 deploy:
   provider: pypi
   distributions: sdist bdist_wheel
