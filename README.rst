@@ -13,7 +13,8 @@ cookiepy
         :target: https://cookiepy.readthedocs.io/en/latest/?badge=latest
         :alt: Documentation Status
 
-
+.. image:: https://codecov.io/gh/SpiralOutDotEu/cookiepy/branch/master/graph/badge.svg
+        :target: https://codecov.io/gh/SpiralOutDotEu/cookiepy
 
 
 Python Boilerplate contains all the boilerplate you need to create a Python package.
