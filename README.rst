@@ -17,7 +17,7 @@ cookiepy
         :target: https://codecov.io/gh/SpiralOutDotEu/cookiepy
 
 
-Python Boilerplate contains all the boilerplate you need to create a Python package.
+Cooking a py...
 
 
 * Free software: MIT license
@@ -27,7 +27,7 @@ Usage
 --------
 ::
 
-        $ pip install -i https://test.pypi.org/simple/ cookiepy
+        $ pip install cookiepy
         
         >>> import cookiepy as py
         >>> py.foo()
