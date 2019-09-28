@@ -5,7 +5,7 @@ python:
 - 3.5
 install: 
   - pip install -U tox-travis
-  - pip install codecov
+  - pip install codecov codacy-coverage
 script: 
   - tox
 after_success:
