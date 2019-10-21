@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from .foo import *
 from .numfoo import *
-from .files import *
+from .images import *
 
 """Top-level package for cookiepy."""
 
