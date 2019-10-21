@@ -16,6 +16,14 @@ cookiepy
 .. image:: https://codecov.io/gh/SpiralOutDotEu/cookiepy/branch/master/graph/badge.svg
         :target: https://codecov.io/gh/SpiralOutDotEu/cookiepy
 
+.. image:: https://pyup.io/repos/github/SpiralOutDotEu/cookiepy/shield.svg
+     :target: https://pyup.io/repos/github/SpiralOutDotEu/cookiepy/
+     :alt: Updates
+
+.. image:: https://pyup.io/repos/github/SpiralOutDotEu/cookiepy/python-3-shield.svg
+     :target: https://pyup.io/repos/github/SpiralOutDotEu/cookiepy/
+     :alt: Python 3
+
 
 Cooking a py...
 
