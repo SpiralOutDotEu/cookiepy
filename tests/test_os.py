@@ -18,7 +18,7 @@ class TestFiles(unittest.TestCase):
     @mock.patch('os.walk', side_effect=mock_fs)
     def test_it_gets_all_images_in_folder(self, mock_fs):
         expected = ['/foo/bar/image1.jpg', '/foo/baz/image2.jpeg']
-        result = cp.get_images("/test/folder")
+        result = cp.get_all_images_in("/test/folder")
         assert list(result) == expected
 
     def test_it_checks_if_is_image(self):
