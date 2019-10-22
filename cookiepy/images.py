@@ -1,7 +1,7 @@
 import os
 
 
-def get_images(folder):
+def get_all_images_in(folder):
     for (dirpath, dirnames, filenames) in os.walk(folder):
         for file in filenames:
             if (is_image(file)):
