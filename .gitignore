@@ -104,3 +104,6 @@ ENV/
 # IDE
 .vscode/
 .idea/
+
+# Data
+/data

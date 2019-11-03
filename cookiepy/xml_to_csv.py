@@ -10,10 +10,16 @@ python xml_to_csv.py -i [PATH_TO_IMAGES_FOLDER]/test
 """
 
 import os
-import files
+from .files import *
 import pandas as pd
 import argparse
 import xml.etree.ElementTree as ET
+
+
+def xml_to_element(xml_file):
+    tree = ET.parse(xml_file)
+    root = tree.getroot()
+    return tree, root
 
 
 def xml_to_csv(path):
@@ -32,8 +38,7 @@ def xml_to_csv(path):
     classes_names = []
     xml_list = []
     for xml_file in all_xml_in(path):
-        tree = ET.parse(xml_file)
-        root = tree.getroot()
+        tree, root = xml_to_element(xml_file)
         for member in root.findall("object"):
             classes_names.append(member[0].text)
             value = (
