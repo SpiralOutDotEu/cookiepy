@@ -1,4 +1,4 @@
-from unittest.mock import patch
+from unittest.mock import patch, MagicMock
 import unittest
 from unittest import mock
 import cookiepy as cp
@@ -20,3 +20,10 @@ class TestXML_to_CSV(unittest.TestCase):
     def test_it_converts_XML_to_element(self, mock_parse):
         result_tree, result_root = cp.xml_to_element("mock file")
         assert result_tree.getroot() == result_root == "getroot"
+
+    def test_it_gets_object_elements_from_root(self):
+        mock_root = MagicMock()
+        mock_root.findall = MagicMock(return_value="mock_objects")
+        result = cp.all_object_elements_in(mock_root)
+        assert result is "mock_objects"
+        mock_root.findall.assert_called_with("object")

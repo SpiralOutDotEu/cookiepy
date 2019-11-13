@@ -26,15 +26,15 @@ def xml_to_dataframe(path):
     object_list = []
     for xml_file in all_xml_in(path):
         tree, root = xml_to_element(xml_file)
-        for object in all_objects_in(root):
-            append_object_to_list(root, object, object_list)
+        for object in all_object_elements_in(root):
+            append_object_element_to_list(root, object, object_list)
     objects_dataframe = pd.DataFrame(object_list)
     classes_names = classes_from_dataframe(objects_dataframe)
     return objects_dataframe, classes_names
 
 
-def append_object_to_list(root, object, object_list):
-    value = object_to_dict(root, object)
+def append_object_element_to_list(root, object_element, object_list):
+    value = object_to_dict(root, object_element)
     object_list.append(value)
 
 
@@ -59,7 +59,7 @@ def object_to_dict(root_element, object_element):
     return value
 
 
-def all_objects_in(root):
+def all_object_elements_in(root):
     return root.findall("object")
 
 
