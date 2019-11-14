@@ -16,12 +16,6 @@ import argparse
 import xml.etree.ElementTree as ET
 
 
-def xml_to_element(xml_file):
-    tree = ET.parse(xml_file)
-    root = tree.getroot()
-    return tree, root
-
-
 def xml_to_dataframe(path):
     object_list = []
     for xml_file in all_xml_in(path):
@@ -33,16 +27,19 @@ def xml_to_dataframe(path):
     return objects_dataframe, classes_names
 
 
+def xml_to_element(xml_file):
+    tree = ET.parse(xml_file)
+    root = tree.getroot()
+    return tree, root
+
+
+def all_object_elements_in(root):
+    return root.findall("object")
+
+
 def append_object_element_to_list(root, object_element, object_list):
     value = object_to_dict(root, object_element)
     object_list.append(value)
-
-
-def classes_from_dataframe(objects_dataframe):
-    classes_column = objects_dataframe['class'].to_numpy()
-    classes_names = list(set(classes_column))
-    classes_names.sort()
-    return classes_names
 
 
 def object_to_dict(root_element, object_element):
@@ -59,8 +56,11 @@ def object_to_dict(root_element, object_element):
     return value
 
 
-def all_object_elements_in(root):
-    return root.findall("object")
+def classes_from_dataframe(objects_dataframe):
+    classes_column = objects_dataframe['class'].to_numpy()
+    classes_names = list(set(classes_column))
+    classes_names.sort()
+    return classes_names
 
 
 def main():
