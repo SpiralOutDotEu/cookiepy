@@ -9,7 +9,6 @@ python xml_to_csv.py -i [PATH_TO_IMAGES_FOLDER]/test
  -o [PATH_TO_ANNOTATIONS_FOLDER]/test_labels.csv
 """
 
-import os
 from .files import *
 import pandas as pd
 import argparse
