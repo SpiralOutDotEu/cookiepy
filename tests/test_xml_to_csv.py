@@ -30,17 +30,17 @@ class TestItConvertsXMLtoCSV(unittest.TestCase):
         mock_root.findall.assert_called_with("object")
 
     def test_it_converts_object_element_to_dict(self):
-        mock_root = ET.fromstring("<root>"
+        stub_root = ET.fromstring("<root>"
                                   "<folder>images</folder>"
                                   r"<path>C:\data\images\file.jpg</path>"
                                   "<filename>file.jpg</filename>"
                                   "<size><width>800</width><height>600</height></size>"
                                   "</root>")
-        mock_object_element = ET.fromstring("<object><name>object1</name><pose>Unspecified</pose>"
+        stub_object_element = ET.fromstring("<object><name>object1</name><pose>Unspecified</pose>"
                                             "<truncated>0</truncated><difficult>0</difficult>"
                                             "<bndbox><xmin>100</xmin><ymin>101</ymin>"
                                             "<xmax>200</xmax><ymax>201</ymax></bndbox></object>")
-        result = cp.object_element_to_dict(mock_root, mock_object_element)
+        result = cp.object_element_to_dict(stub_root, stub_object_element)
         assert result == {"filename": "file.jpg",
                           "width": 800,
                           "height": 600,
