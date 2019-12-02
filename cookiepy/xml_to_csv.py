@@ -41,7 +41,7 @@ def object_element_to_dict(root_element, object_element):
         "filename": root_element.find("filename").text,
         "width": int(root_element.find("size").find("width").text),
         "height": int(root_element.find("size").find("height").text),
-        "class": object_element[0].text,
+        "class": object_element.find("name").text,
         "xmin": int(object_element.find("bndbox").find("xmin").text),
         "ymin": int(object_element.find("bndbox").find("ymin").text),
         "xmax": int(object_element.find("bndbox").find("xmax").text),
