@@ -1,7 +1,7 @@
 from unittest.mock import patch, MagicMock
 import unittest
 from unittest import mock
-import cookiepy as cp
+from cookiepy.xml_to_csv import xml_to_element, all_object_elements_in, object_element_to_dict
 import xml.etree.ElementTree as ET
 
 
@@ -19,13 +19,13 @@ class TestItConvertsXMLtoCSV(unittest.TestCase):
 
     @mock.patch('xml.etree.ElementTree.parse', side_effect=mock_parse)
     def test_it_converts_XML_to_element(self, mock_parse):
-        result_tree, result_root = cp.xml_to_element("mock file")
+        result_tree, result_root = xml_to_element("mock file")
         assert result_tree.getroot() == result_root == "getroot"
 
     def test_it_gets_object_elements_from_root(self):
         mock_root = MagicMock()
         mock_root.findall = MagicMock(return_value="mock_objects")
-        result = cp.all_object_elements_in(mock_root)
+        result = all_object_elements_in(mock_root)
         assert result is "mock_objects"
         mock_root.findall.assert_called_with("object")
 
@@ -40,7 +40,7 @@ class TestItConvertsXMLtoCSV(unittest.TestCase):
                                             "<truncated>0</truncated><difficult>0</difficult>"
                                             "<bndbox><xmin>100</xmin><ymin>101</ymin>"
                                             "<xmax>200</xmax><ymax>201</ymax></bndbox></object>")
-        result = cp.object_element_to_dict(stub_root, stub_object_element)
+        result = object_element_to_dict(stub_root, stub_object_element)
         assert result == {"filename": "file.jpg",
                           "width": 800,
                           "height": 600,
