@@ -2,6 +2,7 @@ from unittest.mock import patch, MagicMock
 import unittest
 from unittest import mock
 import cookiepy as cp
+import xml.etree.ElementTree as ET
 
 
 class MockTree:
@@ -27,3 +28,24 @@ class TestItConvertsXMLtoCSV(unittest.TestCase):
         result = cp.all_object_elements_in(mock_root)
         assert result is "mock_objects"
         mock_root.findall.assert_called_with("object")
+
+    def test_it_converts_object_element_to_dict(self):
+        mock_root = ET.fromstring("<root>"
+                                  "<folder>images</folder>"
+                                  r"<path>C:\data\images\file.jpg</path>"
+                                  "<filename>file.jpg</filename>"
+                                  "<size><width>800</width><height>600</height></size>"
+                                  "</root>")
+        mock_object_element = ET.fromstring("<object><name>object1</name><pose>Unspecified</pose>"
+                                            "<truncated>0</truncated><difficult>0</difficult>"
+                                            "<bndbox><xmin>100</xmin><ymin>101</ymin>"
+                                            "<xmax>200</xmax><ymax>201</ymax></bndbox></object>")
+        result = cp.object_element_to_dict(mock_root, mock_object_element)
+        assert result == {"filename": "file.jpg",
+                          "width": 800,
+                          "height": 600,
+                          "class": "object1",
+                          "xmin": 100,
+                          "ymin": 101,
+                          "xmax": 200,
+                          "ymax": 201}

@@ -20,7 +20,7 @@ def xml_to_dataframe(path):
     for xml_file in all_xml_in(path):
         tree, root = xml_to_element(xml_file)
         for object_element in all_object_elements_in(root):
-            object_list.append(object_to_dict(root, object_element))
+            object_list.append(object_element_to_dict(root, object_element))
     objects_dataframe = pd.DataFrame(object_list)
     classes_names = classes_from_dataframe(objects_dataframe)
     return objects_dataframe, classes_names
@@ -36,16 +36,16 @@ def all_object_elements_in(root):
     return root.findall("object")
 
 
-def object_to_dict(root_element, object_element):
+def object_element_to_dict(root_element, object_element):
     value = {
         "filename": root_element.find("filename").text,
-        "width": int(root_element.find("size")[0].text),
-        "height": int(root_element.find("size")[1].text),
+        "width": int(root_element.find("size").find("width").text),
+        "height": int(root_element.find("size").find("height").text),
         "class": object_element[0].text,
-        "xmin": int(object_element[4][0].text),
-        "ymin": int(object_element[4][1].text),
-        "xmax": int(object_element[4][2].text),
-        "ymax": int(object_element[4][3].text),
+        "xmin": int(object_element.find("bndbox").find("xmin").text),
+        "ymin": int(object_element.find("bndbox").find("ymin").text),
+        "xmax": int(object_element.find("bndbox").find("xmax").text),
+        "ymax": int(object_element.find("bndbox").find("ymax").text),
     }
     return value
 
