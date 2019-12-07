@@ -13,17 +13,21 @@ from .files import *
 import pandas as pd
 import argparse
 import xml.etree.ElementTree as ET
-
+import xmltodict
 
 def xml_to_dataframe(path):
     object_list = []
     for xml_file in all_xml_in(path):
-        tree, root = xml_to_element(xml_file)
-        for object_element in all_object_elements_in(root):
-            object_list.append(object_element_to_dict(root, object_element))
+        xml_to_object_list(object_list, xml_file)
     objects_dataframe = pd.DataFrame(object_list)
     classes_names = classes_from_dataframe(objects_dataframe)
     return objects_dataframe, classes_names
+
+
+def xml_to_object_list(object_list, xml_file):
+    tree, root = xml_to_element(xml_file)
+    for object_element in all_object_elements_in(root):
+        object_list.append(object_element_to_dict(root, object_element))
 
 
 def xml_to_element(xml_file):
