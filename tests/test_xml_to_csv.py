@@ -1,7 +1,7 @@
 from unittest.mock import patch, MagicMock
 import unittest
 from unittest import mock
-from cookiepy.xml_to_csv import xml_to_element, all_object_elements_in, object_element_to_dict
+from cookiepy.xml_to_csv import xml_to_element, all_object_elements_in, object_element_to_dict, dataframe_to_csv
 import xml.etree.ElementTree as ET
 
 
@@ -49,3 +49,10 @@ class TestItConvertsXMLtoCSV(unittest.TestCase):
                           "ymin": 101,
                           "xmax": 200,
                           "ymax": 201}
+
+    def test_it_saves_dataframe_to_csv(self):
+        mock_dataframe = MagicMock()
+        mock_file = MagicMock()
+        mock_dataframe.to_csv = MagicMock(return_value="mock_dataframe_to_csv")
+        dataframe_to_csv(mock_dataframe, mock_file)
+        mock_dataframe.to_csv.assert_called_with(mock_file, index=None)

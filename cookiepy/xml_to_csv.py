@@ -24,6 +24,10 @@ def xml_to_dataframe(path):
     return objects_dataframe, classes_names
 
 
+def dataframe_to_csv(dataframe, file):
+    return dataframe.to_csv(file, index=None)
+
+
 def xml_to_object_list(object_list, xml_file):
     tree, root = xml_to_element(xml_file)
     for object_element in all_object_elements_in(root):
@@ -59,6 +63,7 @@ def classes_from_dataframe(objects_dataframe):
     classes_names = list(set(classes_column))
     classes_names.sort()
     return classes_names
+
 
 
 def main():
