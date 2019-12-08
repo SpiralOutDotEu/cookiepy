@@ -1,7 +1,8 @@
 from unittest.mock import patch, MagicMock
 import unittest
 from unittest import mock
-from cookiepy.xml_to_csv import xml_to_element, all_object_elements_in, object_element_to_dict, dataframe_to_csv
+from cookiepy.xml_to_csv import xml_to_element, all_object_elements_in, object_element_to_dict, dataframe_to_csv, \
+    xml_to_dataframe
 import xml.etree.ElementTree as ET
 
 
@@ -51,8 +52,11 @@ class TestItConvertsXMLtoCSV(unittest.TestCase):
                           "ymax": 201}
 
     def test_it_saves_dataframe_to_csv(self):
-        mock_dataframe = MagicMock()
-        mock_file = MagicMock()
-        mock_dataframe.to_csv = MagicMock(return_value="mock_dataframe_to_csv")
-        dataframe_to_csv(mock_dataframe, mock_file)
-        mock_dataframe.to_csv.assert_called_with(mock_file, index=None)
+        objects_dataframe, classes_names = xml_to_dataframe('../data/labeled images')
+        dataframe_to_csv(objects_dataframe, '../data/train data/train.csv')
+        pass
+        # mock_dataframe = MagicMock()
+        # mock_file = MagicMock()
+        # mock_dataframe.to_csv = MagicMock(return_value="mock_dataframe_to_csv")
+        # dataframe_to_csv(mock_dataframe, mock_file)
+        # mock_dataframe.to_csv.assert_called_with(mock_file, index=None)

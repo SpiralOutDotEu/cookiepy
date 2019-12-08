@@ -11,6 +11,7 @@ python xml_to_csv.py -i [PATH_TO_IMAGES_FOLDER]/test
 
 from .files import *
 import pandas as pd
+import numpy as np
 import argparse
 import xml.etree.ElementTree as ET
 
@@ -20,11 +21,14 @@ def xml_to_dataframe(path):
     for xml_file in all_xml_in(path):
         xml_to_object_list(object_list, xml_file)
     objects_dataframe = pd.DataFrame(object_list)
-    classes_names = classes_from_dataframe(objects_dataframe)
-    return objects_dataframe, classes_names
+    # classes_names = classes_from_dataframe(objects_dataframe)
+    return objects_dataframe
 
 
 def dataframe_to_csv(dataframe, file):
+    dirname = os.path.dirname(file)
+    if not os.path.exists(dirname):
+        os.mkdir(dirname)
     return dataframe.to_csv(file, index=None)
 
 
@@ -65,6 +69,33 @@ def classes_from_dataframe(objects_dataframe):
     return classes_names
 
 
+def split_train_test_dataframes(input_dataframe=None,
+                                train_ration=0.8):
+    msk = np.random.rand(len(input_dataframe)) < train_ration
+    output_train_dataframe = input_dataframe[msk]
+    output_test_dataframe = input_dataframe[~msk]
+    return output_train_dataframe, output_test_dataframe
+
+
+def write_label_map(objects_dataframe, output_file="data/train data/label_map.pbtxt"):
+    classes_names = classes_from_dataframe(objects_dataframe)
+    label_map_path = os.path.join(output_file)
+
+    dirname = os.path.dirname(output_file)
+    if not os.path.exists(dirname):
+        os.mkdir(dirname)
+
+    pbtxt_content = ""
+    for i, class_name in enumerate(classes_names):
+        pbtxt_content = (
+            pbtxt_content
+            + "item {{\n    id: {0}\n    name: '{1}'\n}}\n\n".format(
+            i + 1, class_name
+        )
+        )
+    pbtxt_content = pbtxt_content.strip()
+    with open(label_map_path, "w") as f:
+        f.write(pbtxt_content)
 
 def main():
     # Initiate argument parser
