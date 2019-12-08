@@ -51,12 +51,3 @@ class TestItConvertsXMLtoCSV(unittest.TestCase):
                           "xmax": 200,
                           "ymax": 201}
 
-    def test_it_saves_dataframe_to_csv(self):
-        objects_dataframe = xml_to_dataframe('../data/labeled images')
-        dataframe_to_csv(objects_dataframe, '../data/train data/train.csv')
-        pass
-        # mock_dataframe = MagicMock()
-        # mock_file = MagicMock()
-        # mock_dataframe.to_csv = MagicMock(return_value="mock_dataframe_to_csv")
-        # dataframe_to_csv(mock_dataframe, mock_file)
-        # mock_dataframe.to_csv.assert_called_with(mock_file, index=None)
