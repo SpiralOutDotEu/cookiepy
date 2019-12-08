@@ -13,7 +13,7 @@ from .files import *
 import pandas as pd
 import argparse
 import xml.etree.ElementTree as ET
-import xmltodict
+
 
 def xml_to_dataframe(path):
     object_list = []
