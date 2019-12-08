@@ -21,7 +21,6 @@ def xml_to_dataframe(path):
     for xml_file in all_xml_in(path):
         xml_to_object_list(object_list, xml_file)
     objects_dataframe = pd.DataFrame(object_list)
-    # classes_names = classes_from_dataframe(objects_dataframe)
     return objects_dataframe
 
 
@@ -97,61 +96,3 @@ def write_label_map(objects_dataframe, output_file="data/train data/label_map.pb
     with open(label_map_path, "w") as f:
         f.write(pbtxt_content)
 
-def main():
-    # Initiate argument parser
-    parser = argparse.ArgumentParser(
-        description="Sample TensorFlow XML-to-CSV converter"
-    )
-    parser.add_argument(
-        "-i",
-        "--inputDir",
-        help="Path to the folder where the input .xml files are stored",
-        type=str,
-    )
-    parser.add_argument(
-        "-o", "--outputFile",
-        help="Name of output .csv file (including path)",
-        type=str
-    )
-
-    parser.add_argument(
-        "-l",
-        "--labelMapDir",
-        help="Directory path to save label_map.pbtxt file is specified.",
-        type=str,
-        default="",
-    )
-
-    args = parser.parse_args()
-
-    if args.inputDir is None:
-        args.inputDir = os.getcwd()
-    if args.outputFile is None:
-        args.outputFile = args.inputDir + "/labels.csv"
-
-    assert os.path.isdir(args.inputDir)
-    os.makedirs(os.path.dirname(args.outputFile), exist_ok=True)
-    xml_df, classes_names = xml_to_dataframe(args.inputDir)
-    xml_df.to_csv(args.outputFile, index=None)
-    print("Successfully converted xml to csv.")
-    if args.labelMapDir:
-        os.makedirs(args.labelMapDir, exist_ok=True)
-        label_map_path = os.path.join(args.labelMapDir, "label_map.pbtxt")
-        print("Generate `{}`".format(label_map_path))
-
-        # Create the `label_map.pbtxt` file
-        pbtxt_content = ""
-        for i, class_name in enumerate(classes_names):
-            pbtxt_content = (
-                pbtxt_content
-                + "item {{\n    id: {0}\n    name: '{1}'\n}}\n\n".format(
-                    i + 1, class_name
-                )
-            )
-        pbtxt_content = pbtxt_content.strip()
-        with open(label_map_path, "w") as f:
-            f.write(pbtxt_content)
-
-
-if __name__ == "__main__":
-    main()
