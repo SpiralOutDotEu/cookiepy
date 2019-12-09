@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from .files import *
 from .xml_to_csv import *
+from .recipe import *
 """Top-level package for cookiepy."""
 
 __author__ = """Nikos Koumbakis"""
