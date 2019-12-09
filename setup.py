@@ -13,7 +13,8 @@ with open('HISTORY.rst') as history_file:
 
 requirements = [
     'Click>=7.0',
-    'numpy'
+    'numpy',
+    'pandas'
  ]
 
 setup_requirements = ['pytest-runner', ]
@@ -51,6 +52,6 @@ setup(
     test_suite='tests',
     tests_require=test_requirements,
     url='https://github.com/SpiralOutDoEu/cookiepy',
-    version='0.6.2',
+    version='0.6.4',
     zip_safe=False,
 )
