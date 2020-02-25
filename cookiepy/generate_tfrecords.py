@@ -8,13 +8,10 @@ import os
 import io
 import pandas as pd
 import tensorflow as tf
-import sys
-
-
+from .od_methods import DuInterface as du_interface
+from .od_methods import LmInterface as lm_interface
 from PIL import Image
-from object_detection.utils import dataset_util
 from collections import namedtuple,OrderedDict
-from object_detection.utils import label_map_util
 
 flags = tf.app.flags
 
@@ -47,7 +44,7 @@ def split(df, group):
     return [data(filename, gb.get_group(x)) for filename, x in zip(gb.groups.keys(), gb.groups)]
 
 
-def create_tf_example(group, path, label_map):
+def create_tf_example(group, path, label_map, du_interface):
     with tf.gfile.GFile(os.path.join(path, "{}".format(group.filename)), "rb") as fid:
         encoded_jpg = fid.read()
     encoded_jpg_io = io.BytesIO(encoded_jpg)
@@ -81,27 +78,27 @@ def create_tf_example(group, path, label_map):
     tf_example = tf.train.Example(
         features=tf.train.Features(
             feature={
-                "image/height": dataset_util.int64_feature(height),
-                "image/width": dataset_util.int64_feature(width),
-                "image/filename": dataset_util.bytes_feature(filename),
-                "image/source_id": dataset_util.bytes_feature(filename),
-                "image/encoded": dataset_util.bytes_feature(encoded_jpg),
-                "image/format": dataset_util.bytes_feature(image_format),
-                "image/object/bbox/xmin": dataset_util.float_list_feature(xmins),
-                "image/object/bbox/xmax": dataset_util.float_list_feature(xmaxs),
-                "image/object/bbox/ymin": dataset_util.float_list_feature(ymins),
-                "image/object/bbox/ymax": dataset_util.float_list_feature(ymaxs),
-                "image/object/class/text": dataset_util.bytes_list_feature(
+                "image/height": du_interface.int64_feature(height),
+                "image/width": du_interface.int64_feature(width),
+                "image/filename": du_interface.bytes_feature(filename),
+                "image/source_id": du_interface.bytes_feature(filename),
+                "image/encoded": du_interface.bytes_feature(encoded_jpg),
+                "image/format": du_interface.bytes_feature(image_format),
+                "image/object/bbox/xmin": du_interface.float_list_feature(xmins),
+                "image/object/bbox/xmax": du_interface.float_list_feature(xmaxs),
+                "image/object/bbox/ymin": du_interface.float_list_feature(ymins),
+                "image/object/bbox/ymax": du_interface.float_list_feature(ymaxs),
+                "image/object/class/text": du_interface.bytes_list_feature(
                     classes_text
                 ),
-                "image/object/class/label": dataset_util.int64_list_feature(classes),
+                "image/object/class/label": du_interface.int64_list_feature(classes),
             }
         )
     )
     return tf_example
 
 
-def csv_to_tfrecord(image_folder,label_map,csv_input,output_path):
+def csv_to_tfrecord(image_folder, label_map, csv_input, output_path, du_interface, lm_interface):
     dirname = os.path.dirname(output_path)
     if not os.path.exists(dirname):
         os.mkdir(dirname)
@@ -110,25 +107,28 @@ def csv_to_tfrecord(image_folder,label_map,csv_input,output_path):
     path = image_folder
     examples = pd.read_csv(csv_input)
 
-   
-
-    label_map = label_map_util.load_labelmap(label_map)
-    categories = label_map_util.convert_label_map_to_categories(
+    label_map = lm_interface.load_labelmap(label_map)
+    categories = lm_interface.convert_label_map_to_categories(
         label_map, max_num_classes=90, use_display_name=True
     )
-    category_index = label_map_util.create_category_index(categories)
+    category_index = lm_interface.create_category_index(categories)
     label_map = {}
     for k, v in category_index.items():
         label_map[v.get("name")] = v.get("id")
     
     grouped = split(examples, "filename")
     for group in grouped:
-        tf_example = create_tf_example(group, path, label_map)
+        tf_example = create_tf_example(group, path, label_map, du_interface)
         writer.write(tf_example.SerializeToString())
     
     writer.close()
     
     print("Successfully created the TFRecords: {}".format(output_path))
+
+
+
+
+
 
 
 
