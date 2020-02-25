@@ -13,7 +13,7 @@ from .od_methods import LmInterface as lm_interface
 from PIL import Image
 from collections import namedtuple,OrderedDict
 
-flags = tf.app.flags
+
 
 
 # if your image has more labels input them as
@@ -21,7 +21,7 @@ flags = tf.app.flags
 # flags.DEFINE_string('label1', '', 'Name of class[1] label')
 # and so on.
 
-FLAGS = flags.FLAGS
+
 
 
 # TO-DO replace this with label map
