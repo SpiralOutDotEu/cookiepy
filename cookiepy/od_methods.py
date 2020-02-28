@@ -1,10 +1,5 @@
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
-
-
-class DuInterface():
+class DatasetUtilInterface():
 
     def int64_feature(value):
         raise NotImplementedError
@@ -24,7 +19,8 @@ class DuInterface():
     def load_labelmap(path):
         raise NotImplementedError
 
-class LmInterface():
+
+class LabelMapUtilInterface():
 
     def _validate_label_map(label_map):
         raise NotImplementedError
@@ -54,5 +50,5 @@ class LmInterface():
     def create_category_index_from_labelmap(label_map_path, use_display_name=True):
         raise NotImplementedError
 
-    def create_class_agnostic_category_index():
+    def create_class_agnostic_category_index(self):
         raise NotImplementedError
