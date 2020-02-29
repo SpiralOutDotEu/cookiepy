@@ -7,4 +7,4 @@ from .generate_tfrecords import csv_to_tfrecord
 
 __author__ = """Nikos Koumbakis"""
 __email__ = 'n.koumbakis@gmail.com'
-__version__ = '0.6.4'
+__version__ = '0.7.0'
