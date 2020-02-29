@@ -14,7 +14,9 @@ with open('HISTORY.rst') as history_file:
 requirements = [
     'Click>=7.0',
     'numpy',
-    'pandas'
+    'pandas',
+    'pillow',
+    'tensorflow'
  ]
 
 setup_requirements = ['pytest-runner', ]
@@ -31,7 +33,6 @@ setup(
         'License :: OSI Approved :: MIT License',
         'Natural Language :: English',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
     ],
