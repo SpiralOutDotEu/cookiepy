@@ -17,7 +17,6 @@ requirements = [
     'pandas',
     'pillow',
     'tensorflow',
-    'pygit2',
     'dulwich'
  ]
 
