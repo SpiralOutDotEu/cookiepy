@@ -17,7 +17,8 @@ requirements = [
     'pandas',
     'pillow',
     'tensorflow',
-    'pygit2'
+    'pygit2',
+    'dulwich'
  ]
 
 setup_requirements = ['pytest-runner', ]
