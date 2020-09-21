@@ -8,4 +8,4 @@ from .tf_models import clone_models
 
 __author__ = """Nikos Koumbakis"""
 __email__ = 'n.koumbakis@gmail.com'
-__version__ = '0.8.0'
+__version__ = '0.8.1'
