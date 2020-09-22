@@ -7,6 +7,6 @@ path = os.path.join(data_folder, "models")
 
 
 def clone_models(models_folder=path, models_url=url):
-    os.mkdir(models_folder)
+    os.makedirs(models_folder, exist_ok=True)
     porcelain.clone(models_url, models_folder)
     return True
