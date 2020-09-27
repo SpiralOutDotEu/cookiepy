@@ -3,7 +3,7 @@ from .files import *
 from .xml_to_csv import *
 from .recipe import *
 from .generate_tfrecords import csv_to_tfrecord
-from .tf_models import get_models
+from .tf_models import *
 """Top-level package for cookiepy."""
 
 __author__ = """Nikos Koumbakis"""
