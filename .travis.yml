@@ -20,4 +20,3 @@ deploy:
     repo: SpiralOutDotEu/cookiepy
     python: 3.7
     branch: master
-    condition: $TRAVIS_BRANCH =~ ^(master)$
