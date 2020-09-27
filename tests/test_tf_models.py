@@ -4,7 +4,7 @@ from unittest import mock
 from dulwich import porcelain
 
 url = "https://github.com/tensorflow/models.git"
-default_path = "data/models"
+default_path = "models"
 
 
 class TestTfModels(unittest.TestCase):
@@ -14,7 +14,7 @@ class TestTfModels(unittest.TestCase):
     def test_it_clones_models_to_data_models_by_default(self, mock_git_clone, mock_mkdir):
         tf_models.clone_models()
 
-        mock_mkdir.assert_called_with("data/models", exist_ok=True)
+        mock_mkdir.assert_called_with(default_path, exist_ok=True)
         mock_git_clone.assert_called_with(url, default_path)
 
     @mock.patch('os.makedirs', autospec=True, exist_ok=True)

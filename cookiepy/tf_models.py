@@ -2,8 +2,8 @@ import os
 from dulwich import porcelain
 
 url = "https://github.com/tensorflow/models.git"
-data_folder = "data"
-path = os.path.join(data_folder, "models")
+models = "models"
+path = os.path.join(models)
 
 
 def clone_models(models_folder=path, models_url=url):
