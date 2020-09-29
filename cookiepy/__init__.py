@@ -8,4 +8,4 @@ from .tf_models import *
 
 __author__ = """Nikos Koumbakis"""
 __email__ = 'n.koumbakis@gmail.com'
-__version__ = '0.9.4'
+__version__ = '0.9.5'
