@@ -1,8 +1,7 @@
 import os
+from subprocess import PIPE
 import subprocess
-import time
 from dulwich import porcelain
-import sys
 
 url = "https://github.com/tensorflow/models.git"
 models = "models"
@@ -17,10 +16,11 @@ def get_models(models_folder=path, models_url=url):
 
 def install_object_detection(models_path=path):
     print(get_install_script(models_path).split())
-    process = subprocess.run(get_install_script(models_path),
+    res = process = subprocess.run(get_install_script(models_path),
                            shell=True,
-                           stdout=sys.stdout,
-                           stderr=sys.stderr)
+                           stdout=PIPE,
+                           stderr=PIPE)
+    print(res.stdout.decode('utf-8'))
     return True
 
 

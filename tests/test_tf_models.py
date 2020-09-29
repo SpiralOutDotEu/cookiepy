@@ -3,7 +3,7 @@ from cookiepy import tf_models
 from unittest import mock
 from dulwich import porcelain
 import subprocess
-import sys
+
 url = "https://github.com/tensorflow/models.git"
 default_path = "models"
 
@@ -42,23 +42,21 @@ class TestTfModels(unittest.TestCase):
     def test_it_returns_the_object_detection_install_script_from_another_model_folder(self):
         assert tf_models.get_install_script('my_folder/my_model') == custom_install_script
 
-    @mock.patch.object(sys, 'stderr')
-    @mock.patch.object(sys, 'stdout')
     @mock.patch.object(subprocess, 'run', autospec=True)
-    def test_it_run_object_detection_api_from_default_folder(self, sub_process_run, stdout, stderr):
+    def test_it_run_object_detection_api_from_default_folder(self, sub_process_run):
+        PIPE = -1
         tf_models.install_object_detection()
-        sub_process_run.assert_called_with(install_script, shell=True, stdout=stdout, stderr=stderr)
+        sub_process_run.assert_called_with(install_script, shell=True, stdout=PIPE, stderr=PIPE)
 
-    @mock.patch.object(sys, 'stderr')
-    @mock.patch.object(sys, 'stdout')
     @mock.patch.object(tf_models, 'get_install_script', autospec=True)
     @mock.patch.object(subprocess, 'run', autospec=True)
-    def test_it_run_object_detection_api_from_another_folder(self, sub_process_run, get_install_path, stdout, stderr):
+    def test_it_run_object_detection_api_from_another_folder(self, sub_process_run, get_install_path):
+        PIPE = -1
         some_folder_path = 'folder1/folder2'
         get_install_path.return_value = 'patch'
 
         tf_models.install_object_detection(models_path=some_folder_path)
 
         get_install_path.assert_called_with(some_folder_path)
-        sub_process_run.assert_called_with('patch', shell=True, stdout=stdout, stderr=stderr)
+        sub_process_run.assert_called_with('patch', shell=True, stdout=PIPE, stderr=PIPE)
 
